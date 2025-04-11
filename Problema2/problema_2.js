@@ -24,6 +24,21 @@ function validateBirthdate(dateString) {
     return date <= today && date >= minDate;
 }
 
+function validateAge2(birthdate, age) {
+    const birthDate = new Date(birthdate);
+    const today = new Date();
+    let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+    const diffMonths = today.getMonth() - birthDate.getMonth();
+    const diffDays = today.getDate() - birthDate.getDate();
+
+    if (diffMonths < 0 || (diffMonths === 0 && today.getDate() < birthDate.getDate())) {
+        if(diffDays < 0){
+            calculatedAge--;
+        }
+    }
+    return calculatedAge === age;
+}
+
 function validateEmail(email){
     if (!email || typeof email !== 'string') {
         return false;
@@ -57,6 +72,14 @@ document.getElementById("submit").addEventListener("click", function(event) {
     const ageI = parseInt(age, 10);
     if(!validateAge(ageI)){
         errors.push("Invalid age");
+        document.getElementById("age").style.borderColor = "red";
+    }
+    else{
+        document.getElementById("age").style.borderColor = "green";
+    }
+
+    if(!validateAge2(birthdate, ageI)){
+        errors.push("Age does not match birthdate");
         document.getElementById("age").style.borderColor = "red";
     }
     else{
