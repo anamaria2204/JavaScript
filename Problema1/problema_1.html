@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problema 1</title>
+</head>
+<body>
+    <select id="firstList" multiple="multiple" size="10">
+        <option value="Lily">Lily</option>
+        <option value="Orchid">Orchid</option>
+        <option value="Rose">Rose</option>
+    </select>
+    <select id="secondList" multiple="multiple" size="10">
+        <option value="Tulip">Tulip</option>
+        <option value="Sunflower">Sunflower</option>
+        <option value="Daisy">Daisy</option>
+    </select>
+</body>
+<script>
+    document.getElementById("firstList").addEventListener(
+        "dblclick", function() {
+            let selected = document.getElementById("firstList");
+            const element = selected.options[selected.selectedIndex];
+            let newOption = new Option(element.value, element.text);
+            element.remove();
+            document.getElementById("secondList").add(newOption);
+        }
+    )
+    document.getElementById("secondList").addEventListener(
+        "dblclick", function() {
+            let selected = document.getElementById("secondList");
+            const element = selected.options[selected.selectedIndex];
+            let newOption = new Option(element.value, element.text);
+            element.remove();
+            document.getElementById("firstList").add(newOption);
+        }
+    )
+</script>
+</html>
